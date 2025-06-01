@@ -1,20 +1,30 @@
 export interface Character {
+  id: number;
   name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-  home_world: string;
-  films: string[];
-  species: string[];
-  vehicles: string[];
-  star_ships: string[];
-  created: string; // ISO date string
-  edited: string; // ISO date string
+  status: 'Alive' | 'Dead' | 'unknown';
+  species: string;
+  type: string;
+  gender: 'Female' | 'Male' | 'Genderless' | 'unknown';
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
+  image: string;
+  episode: string[];
   url: string;
+  created: string;
 }
 
-export type getCharactersResponse = Promise<Character[]>;
+export type getCharactersResponse = {
+  info: {
+    count: number;
+    pages: number;
+    next: string;
+    prev: string;
+  };
+  results: Character[];
+};

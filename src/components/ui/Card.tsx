@@ -1,43 +1,37 @@
-import {Text, View} from 'react-native';
-import React from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
+import {Character} from '../../api/characters/types';
 
-const mockCharacter = {
-  name: 'Luke Skywalker',
-  height: '172',
-  mass: '77',
-  hair_color: 'blond',
-  skin_color: 'fair',
-  eye_color: 'blue',
-  birth_year: '19BBY',
-  gender: 'male',
-  homeworld: 'https://swapi.py4e.com/api/planets/1/',
-  films: [
-    'https://swapi.py4e.com/api/films/1/',
-    'https://swapi.py4e.com/api/films/2/',
-    'https://swapi.py4e.com/api/films/3/',
-    'https://swapi.py4e.com/api/films/6/',
-    'https://swapi.py4e.com/api/films/7/',
-  ],
-  species: ['https://swapi.py4e.com/api/species/1/'],
-  vehicles: [
-    'https://swapi.py4e.com/api/vehicles/14/',
-    'https://swapi.py4e.com/api/vehicles/30/',
-  ],
-  starships: [
-    'https://swapi.py4e.com/api/starships/12/',
-    'https://swapi.py4e.com/api/starships/22/',
-  ],
-  created: '2014-12-09T13:50:51.644000Z',
-  edited: '2014-12-20T21:17:56.891000Z',
-  url: 'https://swapi.py4e.com/api/people/1/',
-};
+interface CardProps {
+  character: Character | undefined;
+}
 
-const Card = () => {
+export const Card = ({character}: CardProps) => {
+  const [checked, setChecked] = useState(false);
+
+  const handleCheck = () => {
+    setChecked(!checked);
+  };
+
+  if (!character) {
+    return null;
+  }
   return (
-    <View>
-      <Text>{mockCharacter.name}</Text>
+    <View className="flex-row items-center bg-white rounded-2xl shadow-md mb-4 p-4">
+      <Image
+        source={{uri: character.image}}
+        className="w-20 h-20 rounded-full"
+      />
+      <View className="ml-4 flex-1">
+        <Text className="text-lg font-bold text-black">{character.name}</Text>
+        <Text className="text-sm text-gray-600">
+          {character.status} • {character.species}
+        </Text>
+        <Text className="text-xs text-gray-400 mt-1">
+          Location: {character.location.name}
+        </Text>
+      </View>
+      <TouchableOpacity onPress={() => handleCheck()} />
     </View>
   );
 };
-
-export default Card;
