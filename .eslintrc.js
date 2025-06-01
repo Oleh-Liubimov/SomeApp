@@ -5,6 +5,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     '@typescript-eslint/func-call-spacing': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
   },
   overrides: [
     {

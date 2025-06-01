@@ -1,10 +1,9 @@
 import {Text, View} from 'react-native';
 import React from 'react';
-import {DefaultStyles} from '../styles/DefaultStyles';
 
 const HomeScreen = () => {
   return (
-    <View style={DefaultStyles.container}>
+    <View className="flex-1 justify-center items-center">
       <Text>Home Screen</Text>
     </View>
   );
