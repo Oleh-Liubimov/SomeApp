@@ -1,11 +1,14 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {RootNavigator} from './src/navigation/RootNavigator';
+
+const queryClient = new QueryClient();
 
 function App(): React.JSX.Element {
   return (
-    <View>
-      <Text>APp</Text>
-    </View>
+    <QueryClientProvider client={queryClient}>
+      <RootNavigator />
+    </QueryClientProvider>
   );
 }
 
