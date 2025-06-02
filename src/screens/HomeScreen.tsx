@@ -17,10 +17,9 @@ const HomeScreen = () => {
   }
 
   return (
-    <View className="flex-1 justify-center items-center p-5">
+    <View className="flex-1 justify-center items-center px-6">
       <FlatList
         className="w-full"
-        initialNumToRender={10}
         showsVerticalScrollIndicator={false}
         onEndReached={() => fetchNextPage()}
         data={data?.pages.flatMap(item => item.results)}

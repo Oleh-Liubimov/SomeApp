@@ -1,6 +1,8 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {Character} from '../../api/characters/types';
+import {HeartIcon} from 'lucide-react-native';
+import {COLORS} from '../../constants/colors';
 
 interface CardProps {
   character: Character | undefined;
@@ -31,7 +33,12 @@ export const Card = ({character}: CardProps) => {
           Location: {character.location.name}
         </Text>
       </View>
-      <TouchableOpacity onPress={() => handleCheck()} />
+      <TouchableOpacity onPress={() => handleCheck()}>
+        <HeartIcon
+          fill={checked ? COLORS.red300 : COLORS.white}
+          color={checked ? COLORS.red300 : COLORS.black}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
