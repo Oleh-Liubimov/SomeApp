@@ -14,11 +14,15 @@ export const MainNavigator = () => {
         component={HomeScreen}
         options={{
           headerTransparent: true,
-          headerBlurEffect: 'light',
+          headerBlurEffect: 'extraLight',
           headerShadowVisible: true,
         }}
       />
-      <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+      <Stack.Screen
+        name="DetailsScreen"
+        component={DetailsScreen}
+        options={{}}
+      />
     </Stack.Navigator>
   );
 };

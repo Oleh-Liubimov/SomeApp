@@ -1,6 +1,8 @@
 export type MainStackParamList = {
   HomeScreen: undefined;
-  DetailsScreen: undefined;
+  DetailsScreen: {
+    id: number;
+  };
 };
 
 export type TabStackParamList = {
