@@ -1,7 +1,7 @@
 import {ActivityIndicator, SafeAreaView, View} from 'react-native';
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {DetailsCard} from '../components/ui/DetailsCard';
-import {RouteProp, useRoute} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {useCharacterById} from '../hooks/useCharacterById';
 import {MainStackParamList} from '../navigation/types/types';
 import {COLORS} from '../constants/colors';
@@ -10,8 +10,15 @@ type DetailsScreenRoute = RouteProp<MainStackParamList, 'DetailsScreen'>;
 
 const DetailsScreen = () => {
   const route = useRoute<DetailsScreenRoute>();
+  const navigation = useNavigation();
 
   const {data, isLoading} = useCharacterById(route.params.id);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: route.params.title,
+    });
+  }, [navigation, route.params.title]);
 
   if (!data) {
     return null;

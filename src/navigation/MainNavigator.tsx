@@ -21,7 +21,9 @@ export const MainNavigator = () => {
       <Stack.Screen
         name="DetailsScreen"
         component={DetailsScreen}
-        options={{}}
+        options={{
+          headerBackButtonDisplayMode: 'generic',
+        }}
       />
     </Stack.Navigator>
   );

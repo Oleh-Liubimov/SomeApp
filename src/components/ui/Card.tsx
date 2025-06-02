@@ -27,7 +27,10 @@ export const Card = ({character}: CardProps) => {
       <TouchableOpacity
         className="flex-1 flex-row"
         onPress={() => {
-          navigation.navigate('DetailsScreen', {id: character.id});
+          navigation.navigate('DetailsScreen', {
+            id: character.id,
+            title: character.name,
+          });
         }}>
         <Image
           source={{uri: character.image}}
