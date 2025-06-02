@@ -9,7 +9,15 @@ const Stack = createNativeStackNavigator<MainStackParamList>();
 export const MainNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="HomeScreen">
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          headerTransparent: true,
+          headerBlurEffect: 'light',
+          headerShadowVisible: true,
+        }}
+      />
       <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
     </Stack.Navigator>
   );

@@ -19,6 +19,7 @@ export const TabNavigator = () => {
         component={MainNavigator}
         options={{
           headerShown: false,
+          title: 'Home',
           tabBarIcon: HomeIcon,
         }}
       />
@@ -27,6 +28,7 @@ export const TabNavigator = () => {
         component={FavoritesScreen}
         options={{
           tabBarIcon: FavoritesIcon,
+          title: 'Favorites',
         }}
       />
     </Tab.Navigator>

@@ -1,12 +1,17 @@
-import {ActivityIndicator, FlatList, View} from 'react-native';
-import React from 'react';
+import {ActivityIndicator, FlatList, SafeAreaView, View} from 'react-native';
+import React, {useRef} from 'react';
 
 import {COLORS} from '../constants/colors';
 import {useCharacters} from '../hooks/useCharacters';
 import {Card} from '../components/ui/Card';
+import {useScrollToTop} from '@react-navigation/native';
 
 const HomeScreen = () => {
-  const {data, isLoading, fetchNextPage} = useCharacters();
+  const {data, isLoading, fetchNextPage, isFetching} = useCharacters();
+
+  const listRef = useRef<FlatList>(null);
+
+  useScrollToTop(listRef);
 
   if (isLoading) {
     return (
@@ -17,15 +22,24 @@ const HomeScreen = () => {
   }
 
   return (
-    <View className="flex-1 justify-center items-center px-6">
-      <FlatList
-        className="w-full"
-        showsVerticalScrollIndicator={false}
-        onEndReached={() => fetchNextPage()}
-        data={data?.pages.flatMap(item => item.results)}
-        renderItem={({item}) => <Card character={item} />}
-      />
-    </View>
+    <SafeAreaView className="flex-1">
+      <View className="flex-1 px-4">
+        <FlatList
+          ref={listRef}
+          className="w-full"
+          showsVerticalScrollIndicator={false}
+          ListFooterComponent={
+            isFetching ? (
+              <ActivityIndicator size={'small'} color={COLORS.black} />
+            ) : null
+          }
+          contentContainerClassName="pt-4"
+          onEndReached={() => fetchNextPage()}
+          data={data?.pages.flatMap(item => item.results)}
+          renderItem={({item}) => <Card character={item} />}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

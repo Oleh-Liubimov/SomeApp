@@ -1,19 +1,17 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {Character} from '../../api/characters/types';
 import {HeartIcon} from 'lucide-react-native';
 import {COLORS} from '../../constants/colors';
+import {useFavoritesStore} from '../../store/favoritesStore';
 
 interface CardProps {
-  character: Character | undefined;
+  character: Character;
 }
 
 export const Card = ({character}: CardProps) => {
-  const [checked, setChecked] = useState(false);
-
-  const handleCheck = () => {
-    setChecked(!checked);
-  };
+  const toggleFavorite = useFavoritesStore(s => s.toggleFavorite);
+  const isFavorite = useFavoritesStore(s => s.isFavorite(character?.id));
 
   if (!character) {
     return null;
@@ -33,10 +31,10 @@ export const Card = ({character}: CardProps) => {
           Location: {character.location.name}
         </Text>
       </View>
-      <TouchableOpacity onPress={() => handleCheck()}>
+      <TouchableOpacity onPress={() => toggleFavorite(character)}>
         <HeartIcon
-          fill={checked ? COLORS.red300 : COLORS.white}
-          color={checked ? COLORS.red300 : COLORS.black}
+          fill={isFavorite ? COLORS.red300 : COLORS.white}
+          color={isFavorite ? COLORS.red300 : COLORS.black}
         />
       </TouchableOpacity>
     </View>
