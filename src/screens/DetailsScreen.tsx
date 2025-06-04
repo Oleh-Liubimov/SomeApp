@@ -8,7 +8,7 @@ import {COLORS} from '../constants/colors';
 
 type DetailsScreenRoute = RouteProp<MainStackParamList, 'DetailsScreen'>;
 
-const DetailsScreen = () => {
+export const DetailsScreen = () => {
   const route = useRoute<DetailsScreenRoute>();
   const navigation = useNavigation();
 
@@ -36,5 +36,3 @@ const DetailsScreen = () => {
     </SafeAreaView>
   );
 };
-
-export default DetailsScreen;

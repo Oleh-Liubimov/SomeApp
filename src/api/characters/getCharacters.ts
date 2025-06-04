@@ -9,5 +9,7 @@ export interface SearchParams {
 export const getCharacters = async ({
   page = 1,
 }: SearchParams): Promise<getCharactersResponse> => {
-  return await get<getCharactersResponse>(`/character/?page=${page}`);
+  const response = await get<getCharactersResponse>(`/character/?page=${page}`);
+  console.log('response', response.results[0]);
+  return response;
 };

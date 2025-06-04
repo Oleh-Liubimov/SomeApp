@@ -10,9 +10,10 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 interface CardProps {
   character: Character;
+  isCardTouchable?: boolean;
 }
 
-export const Card = ({character}: CardProps) => {
+export const Card = ({character, isCardTouchable = true}: CardProps) => {
   const toggleFavorite = useFavoritesStore(s => s.toggleFavorite);
   const isFavorite = useFavoritesStore(s => s.isFavorite(character?.id));
 
@@ -22,16 +23,22 @@ export const Card = ({character}: CardProps) => {
   if (!character) {
     return null;
   }
+
   return (
     <View className="flex-row items-center bg-white rounded-2xl shadow-md mb-4 p-4">
       <TouchableOpacity
         className="flex-1 flex-row"
-        onPress={() => {
-          navigation.navigate('DetailsScreen', {
-            id: character.id,
-            title: character.name,
-          });
-        }}>
+        disabled={!isCardTouchable}
+        onPress={
+          isCardTouchable
+            ? () => {
+                navigation.navigate('DetailsScreen', {
+                  id: character.id,
+                  title: character.name,
+                });
+              }
+            : undefined
+        }>
         <Image
           source={{uri: character.image}}
           className="w-20 h-20 rounded-full"

@@ -6,7 +6,7 @@ import {useCharacters} from '../hooks/useCharacters';
 import {Card} from '../components/ui/Card';
 import {useScrollToTop} from '@react-navigation/native';
 
-const HomeScreen = () => {
+export const HomeScreen = () => {
   const {data, isLoading, fetchNextPage, isFetching} = useCharacters();
 
   const listRef = useRef<FlatList>(null);
@@ -42,5 +42,3 @@ const HomeScreen = () => {
     </SafeAreaView>
   );
 };
-
-export default HomeScreen;
