@@ -5,6 +5,7 @@ import {COLORS} from '../constants/colors';
 import {useCharacters} from '../hooks/useCharacters';
 import {Card} from '../components/ui/Card';
 import {useScrollToTop} from '@react-navigation/native';
+import {FIltersDropdown} from '../components/ui/FIltersDropdown';
 
 export const HomeScreen = () => {
   const {data, isLoading, fetchNextPage, isFetching} = useCharacters();
@@ -24,6 +25,7 @@ export const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 px-4">
+        <FIltersDropdown />
         <FlatList
           ref={listRef}
           className="w-full"
