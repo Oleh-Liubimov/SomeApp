@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import {getCharacterById} from '../api/characters/getCharacterById';
+import {getCharacterById} from '../../api/characters/getCharacterById';
 
 export const useCharacterById = (id: number) => {
   return useQuery({

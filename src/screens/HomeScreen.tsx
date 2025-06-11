@@ -2,13 +2,15 @@ import {ActivityIndicator, FlatList, SafeAreaView, View} from 'react-native';
 import React, {useRef} from 'react';
 
 import {COLORS} from '../constants/colors';
-import {useCharacters} from '../hooks/useCharacters';
 import {Card} from '../components/ui/Card';
 import {useScrollToTop} from '@react-navigation/native';
-import {FIltersDropdown} from '../components/ui/FIltersDropdown';
+import {FiltersDropdown} from '../components/ui/FIltersDropdown';
+import {useFiltersStore} from '../store/filtersStore';
+import {useCharacters} from '../hooks/query/useCharacters';
 
 export const HomeScreen = () => {
-  const {data, isLoading, fetchNextPage, isFetching} = useCharacters();
+  const {name} = useFiltersStore();
+  const {data, isLoading, fetchNextPage, isFetching} = useCharacters(name);
 
   const listRef = useRef<FlatList>(null);
 
@@ -25,7 +27,7 @@ export const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 px-4">
-        <FIltersDropdown />
+        <FiltersDropdown />
         <FlatList
           ref={listRef}
           className="w-full"

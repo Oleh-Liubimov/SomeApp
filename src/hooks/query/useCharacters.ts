@@ -1,10 +1,10 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
-import {getCharacters} from '../api/characters/getCharacters';
+import {getCharacters} from '../../api/characters/getCharacters';
 
-export const useCharacters = () => {
+export const useCharacters = (query: string) => {
   return useInfiniteQuery({
-    queryKey: ['characters'],
-    queryFn: ({pageParam = 1}) => getCharacters({page: pageParam}),
+    queryKey: ['characters', query],
+    queryFn: ({pageParam = 1}) => getCharacters({page: pageParam, query}),
     initialPageParam: 0,
     getNextPageParam: lastPage => {
       if (!lastPage.info.next) {
