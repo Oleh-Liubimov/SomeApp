@@ -1,11 +1,10 @@
 import {create} from 'zustand';
+import {GenderType, StatusType} from '../types';
 
 export type filtersState = {
   name: string;
-  status: 'alive' | 'dead' | 'unknown' | null;
-  species: string;
-  type: string;
-  gender: 'female' | 'male' | 'genderless' | 'unknown' | null;
+  status: StatusType;
+  gender: GenderType;
   setFilters: (
     filters: Partial<Omit<filtersState, 'setFilters' | 'resetFilters'>>,
   ) => void;
@@ -14,17 +13,13 @@ export type filtersState = {
 
 export const useFiltersStore = create<filtersState>(set => ({
   name: '',
-  gender: null,
-  species: '',
-  status: null,
-  type: '',
+  gender: undefined,
+  status: undefined,
   setFilters: filters => set(state => ({...state, ...filters})),
   resetFilters: () =>
     set({
       name: '',
-      gender: null,
-      species: '',
-      status: null,
-      type: '',
+      gender: undefined,
+      status: undefined,
     }),
 }));

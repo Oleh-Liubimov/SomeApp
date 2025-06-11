@@ -1,9 +1,18 @@
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useEffect} from 'react';
 import {Character} from '../../api/characters/types';
 import {HeartIcon} from 'lucide-react-native';
 import {COLORS} from '../../constants/colors';
 import {useFavoritesStore} from '../../store/favoritesStore';
+import {useEpisodeById} from '../../hooks/query/useEpisodesByIds';
+import {EpisodeCard} from './EpisodeCard';
 
 interface CardProps {
   character: Character;
@@ -13,10 +22,20 @@ export const DetailsCard = ({character}: CardProps) => {
   const toggleFavorite = useFavoritesStore(s => s.toggleFavorite);
   const isFavorite = useFavoritesStore(s => s.isFavorite(character?.id));
 
+  const episodesIds = character.episode.map(url => {
+    const ids = url.split('/');
+    return ids[ids.length - 1];
+  });
+
+  const {data, isLoading} = useEpisodeById(episodesIds);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   if (!character) {
     return null;
   }
-  console.log(character);
 
   return (
     <View className="flex-1 items-center">
@@ -49,6 +68,18 @@ export const DetailsCard = ({character}: CardProps) => {
             Location: {character.location.name}
           </Text>
         </View>
+      </View>
+      <View className="pt-2">
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            data={data}
+            showsVerticalScrollIndicator={false}
+            contentContainerClassName="gap-2"
+            renderItem={({item}) => <EpisodeCard episode={item} />}
+          />
+        )}
       </View>
     </View>
   );
