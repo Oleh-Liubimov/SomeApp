@@ -13,7 +13,7 @@ export const CharactersList = () => {
 
   return (
     <>
-      {characters.length === 0 && !isLoading ? (
+      {characters.length === 0 && isLoading ? (
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator color={COLORS.black} />
         </View>

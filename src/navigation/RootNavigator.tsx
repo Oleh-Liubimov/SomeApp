@@ -22,7 +22,7 @@ export const RootNavigator = () => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <View className="flex-1">
       <NavigationContainer onReady={onReady}>
         <TabNavigator />
       </NavigationContainer>
