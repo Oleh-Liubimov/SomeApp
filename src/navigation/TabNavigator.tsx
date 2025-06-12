@@ -29,6 +29,7 @@ export const TabNavigator = () => {
         options={{
           tabBarIcon: FavoritesIcon,
           title: 'Favorites',
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
