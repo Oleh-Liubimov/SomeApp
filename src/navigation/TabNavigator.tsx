@@ -13,6 +13,7 @@ export const TabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: COLORS.red300,
+        animation: 'fade',
       }}>
       <Tab.Screen
         name="MainStack"
@@ -29,7 +30,7 @@ export const TabNavigator = () => {
         options={{
           tabBarIcon: FavoritesIcon,
           title: 'Favorites',
-          headerShown: false,
+          headerTitleAlign: 'center',
         }}
       />
     </Tab.Navigator>
