@@ -13,7 +13,7 @@ export const HomeScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView className="flex-1">
-        <View className="flex-1 px-4 py-4">
+        <View className="flex-1 px-4 pt-4">
           <AppSearchBar />
           <CharactersList />
         </View>

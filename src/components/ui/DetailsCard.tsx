@@ -1,12 +1,5 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {useEffect} from 'react';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import React from 'react';
 import {Character} from '../../api/characters/types';
 import {HeartIcon} from 'lucide-react-native';
 import {COLORS} from '../../constants/colors';
@@ -27,23 +20,19 @@ export const DetailsCard = ({character}: CardProps) => {
     return ids[ids.length - 1];
   });
 
-  const {data, isLoading} = useEpisodeById(episodesIds);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const {data} = useEpisodeById(episodesIds);
 
   if (!character) {
     return null;
   }
 
   return (
-    <View className="flex-1 items-center">
+    <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
       <Image
         source={{uri: character.image}}
-        className="w-full h-1/3 rounded-3xl"
+        className="w-full aspect-square rounded-3xl"
+        resizeMode="cover"
       />
-
       <View className=" flex-row pt-4 w-full">
         <View className="w-full">
           <View className="flex-row  justify-between">
@@ -70,17 +59,10 @@ export const DetailsCard = ({character}: CardProps) => {
         </View>
       </View>
       <View className="pt-2">
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <FlatList
-            data={data}
-            showsVerticalScrollIndicator={false}
-            contentContainerClassName="gap-2"
-            renderItem={({item}) => <EpisodeCard episode={item} />}
-          />
-        )}
+        {data?.slice(0, 10).map(item => (
+          <EpisodeCard episode={item} key={item.id} />
+        ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };

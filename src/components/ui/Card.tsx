@@ -25,7 +25,7 @@ export const Card = ({character, isCardTouchable = true}: CardProps) => {
   }
 
   return (
-    <View className="flex-row items-center bg-white rounded-2xl shadow-md mb-4 p-4">
+    <View className="flex-row items-center bg-white rounded-2xl shadow-2xl mb-4 p-4">
       <TouchableOpacity
         className="flex-1 flex-row"
         disabled={!isCardTouchable}
