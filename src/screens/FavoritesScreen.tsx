@@ -1,11 +1,12 @@
 import {FlatList, Image, SafeAreaView, Text, View} from 'react-native';
 import React from 'react';
 import {useFavoritesStore} from '../store/favoritesStore';
-import {Card} from '../components/ui/Card';
 import {rem} from '../utils/rem';
+import {FavoritesCard} from '../components/ui/FavoritesCard';
 
 export const FavoritesScreen = () => {
   const favorites = useFavoritesStore(s => s.favorites);
+
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 p-4">
@@ -23,7 +24,7 @@ export const FavoritesScreen = () => {
             showsVerticalScrollIndicator={false}
             data={favorites}
             renderItem={({item}) => (
-              <Card isCardTouchable={false} character={item} />
+              <FavoritesCard isCardTouchable={false} character={item} />
             )}
           />
         )}
