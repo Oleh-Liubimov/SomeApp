@@ -1,4 +1,3 @@
-import {Dimensions} from 'react-native';
 import {Gesture} from 'react-native-gesture-handler';
 import {
   runOnJS,
