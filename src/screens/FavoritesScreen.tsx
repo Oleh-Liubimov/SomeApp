@@ -1,8 +1,9 @@
-import {FlatList, Image, SafeAreaView, Text, View} from 'react-native';
+import {Image, SafeAreaView, Text, View} from 'react-native';
 import React from 'react';
 import {useFavoritesStore} from '../store/favoritesStore';
 import {rem} from '../utils/rem';
 import {FavoritesCard} from '../components/ui/FavoritesCard';
+import Animated, {LinearTransition} from 'react-native-reanimated';
 
 export const FavoritesScreen = () => {
   const favorites = useFavoritesStore(s => s.favorites);
@@ -19,8 +20,9 @@ export const FavoritesScreen = () => {
             <Image source={require('../assets/images/image.png')} />
           </View>
         ) : (
-          <FlatList
+          <Animated.FlatList
             className="w-full"
+            itemLayoutAnimation={LinearTransition}
             showsVerticalScrollIndicator={false}
             data={favorites}
             renderItem={({item}) => (

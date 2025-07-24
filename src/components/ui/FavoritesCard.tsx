@@ -1,10 +1,4 @@
-import {
-  Image,
-  LayoutChangeEvent,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {Character} from '../../api/characters/types';
 import {HeartIcon} from 'lucide-react-native';
@@ -16,7 +10,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {useSwipeDeleteAnimation} from '../../hooks/useSwipeDeleteAnimation';
 import {GestureDetector} from 'react-native-gesture-handler';
-import Animated, {runOnUI, useSharedValue} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 interface CardProps {
   character: Character;
@@ -29,21 +23,11 @@ export const FavoritesCard = ({
 }: CardProps) => {
   const toggleFavorite = useFavoritesStore(s => s.toggleFavorite);
   const isFavorite = useFavoritesStore(s => s.isFavorite(character?.id));
-  const cardHeight = useSharedValue(0);
 
   const {panGesture, rCardContainerStyles} = useSwipeDeleteAnimation({
-    cardHeight,
     character,
   });
 
-  const handleCardHeights = (e: LayoutChangeEvent) => {
-    const {height} = e.nativeEvent.layout;
-    console.log(height);
-
-    runOnUI(() => {
-      cardHeight.value = height;
-    })();
-  };
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
 
@@ -54,7 +38,6 @@ export const FavoritesCard = ({
   return (
     <GestureDetector gesture={panGesture}>
       <Animated.View
-        onLayout={handleCardHeights}
         className="flex-row items-center bg-white rounded-2xl shadow-2xl mb-4 p-4"
         style={rCardContainerStyles}>
         <TouchableOpacity
